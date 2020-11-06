@@ -1,2 +1,2 @@
-# was
-🎨 Deploy applications on one command line
+# Flask-was
+🎨 The API extension of the flask is very comfortable and good
