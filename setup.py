@@ -8,6 +8,6 @@ from setuptools import setup
 
 
 setup(
-    name="flask_was",
+    name="flask-was",
     version="0.0.1",
 )

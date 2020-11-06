@@ -2,6 +2,7 @@
 
 
 def String(obj):
-    if isinstance(obj, str):
+    if type(obj) == str:
         return True
-    return False
+    else:
+        return False
