@@ -7,14 +7,14 @@ class Checker(object):
             try:
                 obj[nowColumnName]
             except:
-                return [False, nowColumnName, "miss"]
+                return [False, nowColumnName, "miss", obj]
         for nowColumn in obj:
             if (len(str(obj)) < self.base[nowColumn].smallest_str) or (
                 len(str(obj)) > self.base[nowColumn].biggest_str
             ):
-                return [False, nowColumn, "length"]
+                return [False, nowColumn, "length", obj]
             if self.base[nowColumn].checktype_func(obj) != True:
-                return [False, nowColumn, "type"]
+                return [False, nowColumn, "type", obj]
         return [True]
 
 

@@ -1,4 +1,5 @@
-from flask import current_app, _app_ctx_stack
+from flask import current_app, _app_ctx_stack, request
+from functools import wraps
 
 from .items import (
     String,
@@ -16,6 +17,8 @@ from .items import (
     EmailAddress,
     ChineseOhhhYeah,
 )
+
+from .checker import Checker
 
 
 class Was(object):
@@ -39,12 +42,39 @@ class Was(object):
         self.EmailAddress = EmailAddress
         self.ChineseOhhhYeah = ChineseOhhhYeah
 
+        self.checker = {}
+
     def init_app(self, app):
         app.config.setdefault("WASAPI_FORMAT", True)
         app.teardown_appcontext(self.teardown)
 
     def teardown(self, exception):
         ctx = _app_ctx_stack.top
+
+    def handlerPost(self, checker):
+        try:
+            self.checker[checker]
+        except:
+            raise RuntimeError("Can find Checker.")
+        data = request.get_json()
+        overdata = self.checker[checker].startCheck(data)
+        return overdata
+
+    def addChecker(self, namespace, obj):
+        if not isinstance(obj, Checker):
+            raise TypeError("Only Checker objects can be added.")
+        self.checker[namespace] = obj
+
+    def checkeout(self, hanlderChecker):
+        def decorator(f):
+            def handler(*args, **kwargs):
+                print("a")
+                handlerPost = self.handlerPost(hanlderChecker)
+                return f(*((handlerPost,) + args), **kwargs)
+
+            return handler
+
+        return decorator
 
 
 __all__ = ["Was"]
