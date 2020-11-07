@@ -24,27 +24,27 @@ def Dict(obj):
 
 
 def WeChatID(obj):
-    return re.compile("^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}$").match(obj)
+    return re.compile(r"^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}$").match(obj)
 
 
 def TencentQQID(obj):
-    return re.compile("[1-9][0-9]{4,}").match(obj)
+    return re.compile(r"[1-9][0-9]{4,}").match(obj)
 
 
 def PhoneID(obj):
-    return re.compile("^1[34578]\d{9}$").match(obj)
+    return re.compile(r"^1[34578]\d{9}$").match(obj)
 
 
 def ChinaPhoneID(obj):
-    return re.compile("\d{3}-\d{8}|\d{4}-\{7,8}").match(obj)
+    return re.compile(r"\d{3}-\d{8}|\d{4}-\{7,8}").match(obj)
 
 
 def CardID(obj):
-    return re.compile("^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X|x)$").match(obj)
+    return re.compile(r"^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X|x)$").match(obj)
 
 
 def ChinaPostID(obj):
-    return re.compile("[1-9]\d{5}(?!\d)").match(obj)
+    return re.compile(r"[1-9]\d{5}(?!\d)").match(obj)
 
 
 # Address Items
@@ -52,17 +52,17 @@ def ChinaPostID(obj):
 
 def InternetProtocolAddress(obj):
     return re.compile(
-        "(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)"
+        r"(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d).(25[0-5]|2[0-4]\d|[0-1]\d{2}|[1-9]?\d)"
     ).match(obj)
 
 
 def URLAddress(obj):
-    return re.compile("[a-zA-z]+://[^\s]*").match(obj)
+    return re.compile(r"[a-zA-z]+://[^\s]*").match(obj)
 
 
 def EmailAddress(obj):
     return re.compile(
-        "[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?"
+        r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?"
     ).match(obj)
 
 
