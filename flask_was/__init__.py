@@ -1,4 +1,8 @@
 from .core import Was
-from .checker import Checker
-from .checker import Column
-from .items import String
+from .checker import Checker, Column
+
+__all__ = [
+    "Was",
+    "Checker",
+    "Column",
+]

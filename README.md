@@ -1,5 +1,6 @@
 # Flask-Was
-🎨 The API extension of the flask is very comfortable and good
+
+🍾 Flask extension for JSON API
 
 ## Feature
 

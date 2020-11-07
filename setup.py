@@ -2,12 +2,13 @@
 Flask-Was
 -------------
 
-The API extension of the flask is very comfortable and good
+🍾 Flask extension for JSON API
 """
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
-    name="flask-was",
+    name="flask_was",
     version="0.0.1",
+    packages=find_packages(),
 )
