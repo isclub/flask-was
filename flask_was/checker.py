@@ -1,6 +1,9 @@
+from flask import session
+
 class Checker(object):
-    def __init__(self, base={}):
+    def __init__(self, base={},session=None):
         self.base = base
+        self.session = session
 
     def startCheck(self, obj):
         for nowColumnName in self.base:
@@ -15,7 +18,11 @@ class Checker(object):
                 return [False, nowColumn, "length", obj]
             if not self.base[nowColumn].checktype_func(obj[nowColumn]):
                 return [False, nowColumn, "type", obj]
-        return [True,obj]
+        session_dispatch = self.session(session=session,data=obj)
+        if session_dispatch:
+            return [True,obj]
+        else:
+            return [False,"","session",obj]
 
 
 class Column(object):
