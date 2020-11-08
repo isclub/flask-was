@@ -1,4 +1,4 @@
-from flask import current_app, _app_ctx_stack, request
+from flask import current_app, _app_ctx_stack, request, sessions, Response
 from functools import wraps
 
 from .items import (
@@ -56,7 +56,7 @@ class Was(object):
             self.checker[checker]
         except:
             raise RuntimeError("Can find Checker.")
-        data = request.get_json()
+        data = request.form
         overdata = self.checker[checker].startCheck(data)
         return overdata
 
@@ -75,6 +75,11 @@ class Was(object):
             return handler
 
         return decorator
+
+    def send(self, json={}, status=200):
+        return Response(
+            response=str(json), status=status, content_type="application/json"
+        )
 
 
 __all__ = ["Was"]

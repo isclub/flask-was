@@ -21,7 +21,7 @@ $ pip install -U flask-was
 
 ## Example
 
-A simple registration verification
+**A simple Signin**
 
 ``` python
 from flask import Flask
@@ -35,19 +35,43 @@ api.addChecker(
     obj=Checker(
         {
             "name": Column(api.String, biggest_str=20, smallest_str=4),
-            "email": Column(api.EmailAddress, biggest_str=255, smallest_str=20),
+            "email": Column(api.EmailAddress, biggest_str=255, smallest_str=3),
+            "password": Column(api.String, biggest_str=20, smallest_str=4),
         }
     ),
 )
 
 
-@app.route("/signin", methods=["GET", "POST"])
+@app.route("/api/signin", methods=["POST"])
 @api.checkeout("signin")
-def client_index(postdata):
-    return str(postdata)
-
+def api_signin(postdata):
+    if postdata[0]:
+        print("======== A new user coming ... ========")
+        print("Name: " + postdata[1]["name"])
+        print("Email: " + postdata[1]["email"])
+        return api.send(json={"messagess": "Signin was OK"}, status=200)
+    else:
+        return api.send(
+            json={"messagess": "Have some error. Check you forms", "postdata": postdata},
+            status=400,
+        )
 
 app.run()
+```
+
+**Post Request**:
+
+``` python
+import requests
+
+print(requests.post(
+    "http://127.0.0.1:5000/api/signin",
+    data={
+        "name":"Flask",
+        "email":"flask@example.org",
+        "password":"12345"
+    },
+).text)
 ```
 
 ## Documentation

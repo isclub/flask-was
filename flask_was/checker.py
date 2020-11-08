@@ -9,13 +9,13 @@ class Checker(object):
             except:
                 return [False, nowColumnName, "miss", obj]
         for nowColumn in obj:
-            if (len(str(obj)) < self.base[nowColumn].smallest_str) or (
-                len(str(obj)) > self.base[nowColumn].biggest_str
+            if (len(str(obj[nowColumn])) < self.base[nowColumn].smallest_str) or (
+                len(str(obj[nowColumn])) > self.base[nowColumn].biggest_str
             ):
                 return [False, nowColumn, "length", obj]
-            if self.base[nowColumn].checktype_func(obj) != True:
+            if not self.base[nowColumn].checktype_func(obj[nowColumn]):
                 return [False, nowColumn, "type", obj]
-        return [True]
+        return [True,obj]
 
 
 class Column(object):
