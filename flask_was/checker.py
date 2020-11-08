@@ -20,7 +20,7 @@ class Checker(object):
                 return [False, nowColumn, "type", obj]
         session_dispatch = self.session(session=session,data=obj)
         if session_dispatch:
-            return [True,obj]
+            return [True,"",obj]
         else:
             return [False,"","session",obj]
 
